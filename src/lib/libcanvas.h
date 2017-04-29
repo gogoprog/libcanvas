@@ -1,21 +1,98 @@
 #pragma once
-extern "C" {
-    struct canvas;
-    struct image;
 
-    canvas * canvas_add_canvas( const char * name );
-    void canvas_set_active_canvas( const canvas * c );
-    void canvas_set_size( const int width, const int height, const float pixel_ratio );
-    void canvas_set_global_alpha( const float value );
-    void canvas_set_transform( const float scaleX, const float skewX, const float skewY, const float scaleY, const float translationX, const float translationY );
-    void canvas_clear_rect( const float x, const float y, const float w, const float h );
-    void canvas_rotate( const float angle );
-    const image * canvas_load_image( const char * filename );
-    void canvas_draw_image( const image * imageHandle, const float x, const float y, const float w, const float h );
-    void canvas_draw_image_clipped( const image * imageHandle, const float sx, const float sy, const float sw, const float sh, const float x, const float y, const float w, const float h );
-    int canvas_get_image_width( const image * imageHandle );
-    int canvas_get_image_height( const image * imageHandle );
-    int canvas_is_image_valid( const image * imageHandle );
-    void canvas_get_size( int * width, int * height );
-    bool canvas_is_visible( const canvas * c );
+extern "C"
+{
+    struct _Canvas;
+    struct _Context;
+
+    _Canvas * lcGetById(const char *name);
+    _Context * lcCanvasGetContext(const _Canvas *canvas, const char *name);
+    void lcCanvasSetPropertyString(const _Canvas *canvas, const char *name, const char *value);
+    void lcCanvasSetPropertyInt(const _Canvas *canvas, const char *name, const int value);
+    void lcContextSetPropertyString(const _Context *context, const char *name, const char *value);
+    void lcContextSetPropertyInt(const _Context *context, const char *name, const int value);
+    void lcContextClearRect(const _Context *context, const int x, const int y, const int w, const int h);
+    void lcContextFillRect(const _Context *context, const int x, const int y, const int w, const int h);
+    void lcContextStrokeRect(const _Context *context, const int x, const int y, const int w, const int h);
+    void lcContextFillText(const _Context *context, const char *text, const int x, const int y, const int maxWidth);
+    void lcContextStrokeText(const _Context *context, const char *text, const int x, const int y, const int maxWidth);
 }
+
+class Context
+{
+    friend class Canvas;
+
+public:
+    inline void setFillStyle(const char *name)
+    {
+        lcContextSetPropertyString(_context, "fillStyle", name);
+    }
+
+    inline void setStrokeStyle(const char *name)
+    {
+        lcContextSetPropertyString(_context, "strokeStyle", name);
+    }
+
+    inline void setFont(const char *name)
+    {
+        lcContextSetPropertyString(_context, "font", name);
+    }
+
+    inline void clearRect(const int x, const int y, const int w, const int h)
+    {
+        lcContextClearRect(_context, x, y, w, h);
+    }
+
+    inline void fillRect(const int x, const int y, const int w, const int h)
+    {
+        lcContextFillRect(_context, x, y, w, h);
+    }
+
+    inline void strokeRect(const int x, const int y, const int w, const int h)
+    {
+        lcContextStrokeRect(_context, x, y, w, h);
+    }
+
+    inline void fillText(const char *text, const int x, const int y, const int maxWidth)
+    {
+        lcContextFillText(_context, text, x, y, maxWidth);
+    }
+
+    inline void strokeText(const char *text, const int x, const int y, const int maxWidth)
+    {
+        lcContextStrokeText(_context, text, x, y, maxWidth);
+    }
+
+private:
+    Context() = default;
+    _Context *_context{nullptr};
+};
+
+class Canvas
+{
+public:
+    Canvas(const char *id)
+    {
+        _canvas = lcGetById(id);
+    }
+
+    Context getContext(const char *name)
+    {
+        Context result;
+        result._context = lcCanvasGetContext(_canvas, name);
+        return result;
+    }
+
+    void setWidth(const int value)
+    {
+        lcCanvasSetPropertyInt(_canvas, "width", value);
+    }
+
+    void setHeight(const int value)
+    {
+        lcCanvasSetPropertyInt(_canvas, "height", value);
+    }
+
+private:
+    _Canvas *_canvas{nullptr};
+};

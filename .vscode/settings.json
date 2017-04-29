@@ -21,6 +21,8 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "iosfwd": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp"
     }
 }
