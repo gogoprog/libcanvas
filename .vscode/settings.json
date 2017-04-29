@@ -1,0 +1,26 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "clang.cxxflags": [
+        "-std=c++11"
+    ],
+    "files.associations": {
+        "fstream": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "exception": "cpp",
+        "initializer_list": "cpp",
+        "new": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "iosfwd": "cpp",
+        "system_error": "cpp"
+    }
+}
