@@ -15,6 +15,7 @@ solution "libcanvas"
             flags { "Optimize" }
         
         configuration "Emscripten*"
+            buildoptions { "--std=c++11" }
             targetname "libcanvas_test.html"
             linkoptions {
                 "--js-library ../src/lib/libcanvas.js"

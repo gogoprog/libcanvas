@@ -1,15 +1,24 @@
-#include <iostream>
 #include "../lib/libcanvas.h"
 
 int main()
 {
-    std::cout << "libcanvas" << std::endl;
+    auto canvas = Canvas("canvas");
 
-    canvas * myCanvas = canvas_add_canvas("canvas");
+    canvas.setWidth(512);
+    canvas.setHeight(512);
 
-    canvas_set_active_canvas(myCanvas);
+    auto context = canvas.getContext("2d");
 
-    canvas_set_size(512, 512, 1);
+    context.setFillStyle("red");
+    context.fillRect(10, 10, 100, 100);
+    context.clearRect(32, 32, 32, 32);
+    context.setStrokeStyle("cyan");
+    context.strokeRect(300, 10, 100, 100);
+
+    context.setFont("12px serif");
+    context.setFillStyle("white");
+    context.fillText("libcanvas test application", 32, 32, 256);
+    context.strokeText("libcanvas test application", 32, 256, 256);
 
     return 0;
 }
