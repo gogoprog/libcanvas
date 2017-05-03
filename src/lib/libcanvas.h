@@ -27,7 +27,8 @@ extern "C"
     void lcContextArcTo(const _Context *context, const float x1, const float y1, const float x2, const float y2, const float radius);
     void lcContextEllipse(const _Context *context, const float x, const float y, const float radiusX, const float radiusY, const float rotation, const float startAngle, const float endAngle, const bool anticlockwise);
     void lcContextRect(const _Context *context, const float x, const float y, const float width, const float height);
-    
+    void lcContextFill(const _Context *context);
+    void lcContextStroke(const _Context *context);
 }
 
 class Context
@@ -144,6 +145,17 @@ public:
     {
         lcContextRect(_context, x, y, width, height);
     }
+
+    inline void fill()
+    {
+        lcContextFill(_context);
+    }
+    
+    inline void stroke()
+    {
+        lcContextStroke(_context);
+    }
+
 
 private:
     Context() = default;

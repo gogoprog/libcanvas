@@ -99,6 +99,14 @@ var LibraryCanvas = {
     lcContextRect: function(context, x, y, width, height) {
         context = Canvas.contextList[context];
         context.rect(x, y, width, height);
+    },
+    lcContextFill: function(context) {
+        context = Canvas.contextList[context];
+        context.fill();
+    },
+    lcContextStroke: function(context) {
+        context = Canvas.contextList[context];
+        context.stroke();
     }
 };
 
