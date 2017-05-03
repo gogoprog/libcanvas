@@ -59,6 +59,46 @@ var LibraryCanvas = {
         context = Canvas.contextList[context];
         text = Pointer_stringify(text);
         context.strokeText(text, x, y, maxWidth);
+    },
+    lcContextBeginPath: function(context) {
+        context = Canvas.contextList[context];
+        context.beginPath();
+    },
+    lcContextClosePath: function(context) {
+        context = Canvas.contextList[context];
+        context.closePath();
+    },
+    lcContextMoveTo: function(context, x, y) {
+        context = Canvas.contextList[context];
+        context.moveTo(x, y);
+    },
+    lcContextLineTo: function(context, x, y) {
+        context = Canvas.contextList[context];
+        context.lineTo(x, y);
+    },
+    lcContextBezierCurveTo: function(context, cp1x, cp1y, cp2x, cp2y, x, y) {
+        context = Canvas.contextList[context];
+        context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+    },
+    lcContextQuadraticCurveTo: function(context, cp1x, cp1y, x, y) {
+        context = Canvas.contextList[context];
+        context.quadraticCurveTo(cp1x, cp1y, x, y);
+    },
+    lcContextArc: function(context, x, y, radius, startAngle, endAngle, anticlockwise) {
+        context = Canvas.contextList[context];
+        context.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+    },
+    lcContextArcTo: function(context, x1, y1, x2, y2, radius) {
+        context = Canvas.contextList[context];
+        context.arcTo(x1, y1, x2, y2, radius);
+    },
+    lcContextEllipse: function(context, x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise) {
+        context = Canvas.contextList[context];
+        context.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
+    },
+    lcContextRect: function(context, x, y, width, height) {
+        context = Canvas.contextList[context];
+        context.rect(x, y, width, height);
     }
 };
 
