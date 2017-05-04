@@ -29,6 +29,8 @@ extern "C"
     void lcContextRect(const _Context *context, const float x, const float y, const float width, const float height);
     void lcContextFill(const _Context *context);
     void lcContextStroke(const _Context *context);
+    bool lcContextIsPointInPath(const _Context *context, const float x, const float y);
+    bool lcContextIsPointInStroke(const _Context *context, const float x, const float y);
 }
 
 class Context
@@ -156,6 +158,15 @@ public:
         lcContextStroke(_context);
     }
 
+    inline bool isPointInPath(const float x, const float y)
+    {
+        return lcContextIsPointInPath(_context, x, y);
+    }
+
+    inline bool isPointInStroke(const float x, const float y)
+    {
+        return lcContextIsPointInStroke(_context, x, y);
+    }
 
 private:
     Context() = default;

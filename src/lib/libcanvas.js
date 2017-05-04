@@ -107,6 +107,14 @@ var LibraryCanvas = {
     lcContextStroke: function(context) {
         context = Canvas.contextList[context];
         context.stroke();
+    },
+    lcContextIsPointInPath: function(context, x, y) {
+        context = Canvas.contextList[context];
+        return context.isPointInPath(x, y);
+    },
+    lcContextIsPointInStroke: function(context, x, y) {
+        context = Canvas.contextList[context];
+        return context.isPointInStroke(x, y);
     }
 };
 

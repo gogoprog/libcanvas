@@ -1,4 +1,5 @@
 #include "../lib/libcanvas.h"
+#include <iostream>
 
 int main()
 {
@@ -31,6 +32,11 @@ int main()
     context.moveTo(20, 20);
     context.lineTo(120, 120);
     context.stroke();
+
+    context.rect(10, 10, 100, 100);
+    context.stroke();
+
+    std::cout << "isPointInPath? " << context.isPointInPath(10, 10) << std::endl;
 
     return 0;
 }
