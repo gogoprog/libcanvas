@@ -1,5 +1,10 @@
 #pragma once
 
+struct TextMetrics
+{
+    float width;
+};
+
 extern "C"
 {
     struct _Canvas;
@@ -16,7 +21,7 @@ extern "C"
     void lcContextStrokeRect(const _Context *context, const int x, const int y, const int w, const int h);
     void lcContextFillText(const _Context *context, const char *text, const int x, const int y, const int maxWidth);
     void lcContextStrokeText(const _Context *context, const char *text, const int x, const int y, const int maxWidth);
-    void lcContextMeasureText(const _Context *context, const char *text);
+    void lcContextMeasureText(const _Context *context, const char *text, TextMetrics *ptr);
     void lcContextBeginPath(const _Context *context);
     void lcContextClosePath(const _Context *context);
     void lcContextMoveTo(const _Context *context, const float x, const float y);
@@ -93,9 +98,11 @@ public:
         lcContextStrokeText(_context, text, x, y, maxWidth);
     }
 
-    inline void measureText(const char *text) // todo: return TextMetrics
+    inline TextMetrics measureText(const char *text)
     {
-        lcContextMeasureText(_context, text);
+        TextMetrics result;
+        lcContextMeasureText(_context, text, &result);
+        return result;
     }
 
     inline void beginPath()

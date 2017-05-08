@@ -38,5 +38,9 @@ int main()
 
     std::cout << "isPointInPath? " << context.isPointInPath(10, 10) << std::endl;
 
+    auto textMetrics = context.measureText("Foobar");
+
+    std::cout << textMetrics.width << std::endl;
+
     return 0;
 }

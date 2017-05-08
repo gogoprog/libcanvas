@@ -115,6 +115,11 @@ var LibraryCanvas = {
     lcContextIsPointInStroke: function(context, x, y) {
         context = Canvas.contextList[context];
         return context.isPointInStroke(x, y);
+    },
+    lcContextMeasureText: function(context, text, ptr) {
+        context = Canvas.contextList[context];
+        var textMetrics = context.measureText(text);
+        {{{ makeSetValue('ptr', '0', 'textMetrics.width', 'float') }}};
     }
 };
 
