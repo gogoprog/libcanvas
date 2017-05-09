@@ -23,6 +23,7 @@
         "iosfwd": "cpp",
         "system_error": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "*.ipp": "cpp"
     }
 }

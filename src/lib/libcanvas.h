@@ -36,6 +36,12 @@ extern "C"
     void lcContextStroke(const _Context *context);
     bool lcContextIsPointInPath(const _Context *context, const float x, const float y);
     bool lcContextIsPointInStroke(const _Context *context, const float x, const float y);
+    void lcContextRotate(const _Context *context, const float angle);
+    void lcContextScale(const _Context *context, const float x, const float y);
+    void lcContextTranslate(const _Context *context, const float x, const float y);
+    void lcContextTransform(const _Context *context, const float a, const float b, const float c, const float d, const float e, const float f);
+    void lcContextSetTransform(const _Context *context, const float a, const float b, const float c, const float d, const float e, const float f);
+    void lcContextResetTransform(const _Context *context);
 }
 
 class Context
@@ -173,6 +179,36 @@ public:
     inline bool isPointInStroke(const float x, const float y)
     {
         return lcContextIsPointInStroke(_context, x, y);
+    }
+
+    inline void rotate(const float angle)
+    {
+        lcContextRotate(_context, angle);
+    }
+
+    inline void scale(const float x, const float y)
+    {
+        lcContextScale(_context, x, y);
+    }
+
+    inline void translate(const float x, const float y)
+    {
+        lcContextTranslate(_context, x, y);
+    }
+
+    inline void transform(const float a, const float b, const float c, const float d, const float e, const float f)
+    {
+        lcContextTransform(_context, a, b, c, d, e, f);
+    }
+
+    inline void setTransform(const float a, const float b, const float c, const float d, const float e, const float f)
+    {
+        lcContextSetTransform(_context, a, b, c, d, e, f);
+    }
+
+    inline void resetTransform()
+    {
+        lcContextResetTransform(_context);
     }
 
 private:

@@ -120,6 +120,30 @@ var LibraryCanvas = {
         context = Canvas.contextList[context];
         var textMetrics = context.measureText(text);
         {{{ makeSetValue('ptr', '0', 'textMetrics.width', 'float') }}};
+    },
+    lcContextRotate: function(context, angle) {
+        context = Canvas.contextList[context];
+        context.rotate(angle);
+    },
+    lcContextScale: function(context, x, y) {
+        context = Canvas.contextList[context];
+        context.scale(x, y);
+    },
+    lcContextTranslate: function(context, x, y) {
+        context = Canvas.contextList[context];
+        context.translate(x, y);
+    },
+    lcContextTransform: function(context, a, b, c, d, e, f) {
+        context = Canvas.contextList[context];
+        context.transform(a, b, c, d, e, f);
+    },
+    lcContextSetTransform: function(context, a, b, c, d, e, f) {
+        context = Canvas.contextList[context];
+        context.setTransform(a, b, c, d, e, f);
+    },
+    lcContextResetTransform: function(context) {
+        context = Canvas.contextList[context];
+        context.resetTransform();
     }
 };
 

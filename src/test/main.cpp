@@ -42,5 +42,11 @@ int main()
 
     std::cout << textMetrics.width << std::endl;
 
+    context.scale(2, 2);
+    context.translate(0, 100);
+
+    context.rect(10, 10, 100, 100);
+    context.stroke();
+
     return 0;
 }
