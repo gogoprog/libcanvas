@@ -16,6 +16,7 @@ extern "C"
     void lcCanvasSetPropertyInt(const _Canvas *canvas, const char *name, const int value);
     void lcContextSetPropertyString(const _Context *context, const char *name, const char *value);
     void lcContextSetPropertyInt(const _Context *context, const char *name, const int value);
+    void lcContextSetPropertyFloat(const _Context *context, const char *name, const float value);
     void lcContextClearRect(const _Context *context, const int x, const int y, const int w, const int h);
     void lcContextFillRect(const _Context *context, const int x, const int y, const int w, const int h);
     void lcContextStrokeRect(const _Context *context, const int x, const int y, const int w, const int h);
@@ -209,6 +210,16 @@ public:
     inline void resetTransform()
     {
         lcContextResetTransform(_context);
+    }
+
+    inline void setGlobalAlpha(const float value)
+    {
+        lcContextSetPropertyFloat(_context, "globalAlpha", value);
+    }
+
+    inline void setGlobalCompositeOperation(const char *value)
+    {
+        lcContextSetPropertyString(_context, "globalCompositeOperation", value);
     }
 
 private:

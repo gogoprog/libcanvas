@@ -38,6 +38,11 @@ var LibraryCanvas = {
         name = Pointer_stringify(name);
         context[name] = value;
     },
+    lcContextSetPropertyFloat: function(context, name, value) {
+        context = Canvas.contextList[context];
+        name = Pointer_stringify(name);
+        context[name] = value;
+    },
     lcContextClearRect: function(context, x, y, w, h) {
         context = Canvas.contextList[context];
         context.clearRect(x, y, w, h);

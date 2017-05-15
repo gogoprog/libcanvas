@@ -10,11 +10,15 @@ int main()
 
     auto context = canvas.getContext("2d");
 
+    context.setGlobalAlpha(0.5f);
+    
     context.setFillStyle("red");
     context.fillRect(10, 10, 100, 100);
     context.clearRect(32, 32, 32, 32);
     context.setStrokeStyle("cyan");
     context.strokeRect(300, 10, 100, 100);
+
+    context.setGlobalAlpha(1.0f);
 
     context.setFont("12px serif");
     context.setFillStyle("white");
