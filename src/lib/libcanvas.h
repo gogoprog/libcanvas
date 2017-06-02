@@ -11,6 +11,7 @@ extern "C"
     struct _Context;
 
     _Canvas * lcGetById(const char *name);
+    _Canvas * lcNewCanvas();
     _Context * lcCanvasGetContext(const _Canvas *canvas, const char *name);
     void lcCanvasSetPropertyString(const _Canvas *canvas, const char *name, const char *value);
     void lcCanvasSetPropertyInt(const _Canvas *canvas, const char *name, const int value);
@@ -43,6 +44,7 @@ extern "C"
     void lcContextTransform(const _Context *context, const float a, const float b, const float c, const float d, const float e, const float f);
     void lcContextSetTransform(const _Context *context, const float a, const float b, const float c, const float d, const float e, const float f);
     void lcContextResetTransform(const _Context *context);
+    void lcContextDrawImage(const _Context *context, const _Canvas *canvas, const float x, const float y);
 }
 
 class Context
@@ -230,6 +232,11 @@ private:
 class Canvas
 {
 public:
+    Canvas()
+    {
+        _canvas = lcNewCanvas();
+    }
+
     Canvas(const char *id)
     {
         _canvas = lcGetById(id);

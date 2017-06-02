@@ -3,6 +3,11 @@ var LibraryCanvas = {
         canvasList: [],
         contextList: []
     },
+    lcNewCanvas: function() {
+        var element = document.createElement('canvas');
+        Canvas.canvasList.push(element);
+        return Canvas.canvasList.length - 1;
+    },
     lcGetById: function(canvasName) {
         canvasName = Pointer_stringify(canvasName);
         var element = document.getElementById(canvasName);
