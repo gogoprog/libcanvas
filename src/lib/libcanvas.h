@@ -47,6 +47,8 @@ extern "C"
     void lcContextDrawImage(const _Context *context, const _Canvas *canvas, const float x, const float y);
 }
 
+class Canvas;
+
 class Context
 {
     friend class Canvas;
@@ -223,6 +225,8 @@ public:
     {
         lcContextSetPropertyString(_context, "globalCompositeOperation", value);
     }
+    
+    void drawImage(const Canvas & canvas, const float x, const float y);
 
 private:
     Context() = default;
@@ -231,6 +235,8 @@ private:
 
 class Canvas
 {
+    friend class Context;
+
 public:
     Canvas()
     {
@@ -262,3 +268,8 @@ public:
 private:
     _Canvas *_canvas{nullptr};
 };
+
+inline void Context::drawImage(const Canvas & canvas, const float x, const float y)
+{
+    lcContextDrawImage(_context, canvas._canvas, x, y);
+}

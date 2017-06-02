@@ -54,9 +54,12 @@ int main()
 
     auto otherCanvas = Canvas();
     auto otherContext = otherCanvas.getContext("2d");
-    context.setFont("12px serif");
-    context.setFillStyle("white");
-    context.fillText("Other canvas", 32, 32, 256);
+    otherContext.setFont("12px serif");
+    otherContext.setFillStyle("white");
+    otherContext.fillText("Other canvas", 32, 32, 256);
+
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    context.drawImage(otherCanvas, 128, 128);
 
     return 0;
 }

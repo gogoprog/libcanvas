@@ -154,6 +154,11 @@ var LibraryCanvas = {
     lcContextResetTransform: function(context) {
         context = Canvas.contextList[context];
         context.resetTransform();
+    },
+    lcContextDrawImage: function(context, canvas, x, y) {
+        context = Canvas.contextList[context];
+        canvas = Canvas.canvasList[canvas];
+        context.drawImage(canvas, x, y);
     }
 };
 
