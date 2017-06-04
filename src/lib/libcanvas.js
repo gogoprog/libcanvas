@@ -32,6 +32,11 @@ var LibraryCanvas = {
         name = Pointer_stringify(name);
         canvas[name] = value;
     },
+    lcCanvasGLTexImage2D__deps: ['$GL'],
+    lcCanvasGLTexImage2D: function(canvas, target, level, internalFormat, format, type) {
+        canvas = Canvas.canvasList[canvas];
+        GL.texImage2d(target, level, internalFormat, format, type, canvas);
+    },
     lcContextSetPropertyString: function(context, name, value) {
         context = Canvas.contextList[context];
         name = Pointer_stringify(name);

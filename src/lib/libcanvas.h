@@ -15,6 +15,7 @@ extern "C"
     _Context * lcCanvasGetContext(const _Canvas *canvas, const char *name);
     void lcCanvasSetPropertyString(const _Canvas *canvas, const char *name, const char *value);
     void lcCanvasSetPropertyInt(const _Canvas *canvas, const char *name, const int value);
+    void lcCanvasGLTexImage2D(const _Canvas *canvas, const int target, const int level, const int internalformat, const int format, const int type);
     void lcContextSetPropertyString(const _Context *context, const char *name, const char *value);
     void lcContextSetPropertyInt(const _Context *context, const char *name, const int value);
     void lcContextSetPropertyFloat(const _Context *context, const char *name, const float value);
@@ -263,6 +264,11 @@ public:
     void setHeight(const int value)
     {
         lcCanvasSetPropertyInt(_canvas, "height", value);
+    }
+
+    void glTexImage2D(const int target, const int level, const int internalFormat, const int format, const int type)
+    {
+        lcCanvasGLTexImage2D(_canvas, target, level, internalFormat, format, type);
     }
 
 private:
