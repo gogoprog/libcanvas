@@ -55,6 +55,7 @@ class Context
     friend class Canvas;
 
 public:
+
     inline void setFillStyle(const char *name)
     {
         lcContextSetPropertyString(_context, "fillStyle", name);
@@ -269,6 +270,11 @@ public:
     void glTexImage2D(const int target, const int level, const int internalFormat, const int format, const int type)
     {
         lcCanvasGLTexImage2D(_canvas, target, level, internalFormat, format, type);
+    }
+
+    static Canvas getById(const char *id)
+    {
+        return Canvas(id);
     }
 
 private:

@@ -3,7 +3,7 @@
 
 int main()
 {
-    auto canvas = Canvas("canvas");
+    auto canvas = Canvas::getById("canvas");
 
     canvas.setWidth(512);
     canvas.setHeight(512);
