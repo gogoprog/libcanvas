@@ -168,11 +168,11 @@ public:
         lcContextRect(_context, x, y, width, height);
     }
 
-    inline void fill()
+    inline void fill(const char *canvasWindingRules)
     {
         lcContextFill(_context);
     }
-    
+
     inline void stroke()
     {
         lcContextStroke(_context);
@@ -227,7 +227,7 @@ public:
     {
         lcContextSetPropertyString(_context, "globalCompositeOperation", value);
     }
-    
+
     void drawImage(const Canvas & canvas, const float x, const float y);
 
 private:
