@@ -11,6 +11,7 @@ extern "C"
     struct _Context;
 
     _Canvas * lcGetById(const char *name);
+    _Canvas * lcGetPreloadedImage(const char *name);
     _Canvas * lcNewCanvas();
     _Context * lcCanvasGetContext(const _Canvas *canvas, const char *name);
     void lcCanvasSetPropertyString(const _Canvas *canvas, const char *name, const char *value);
@@ -277,7 +278,18 @@ public:
         return Canvas(id);
     }
 
+    static Canvas getPreloadedImage(const char *id)
+    {
+        return Canvas(lcGetPreloadedImage(id));
+    }
+
 private:
+
+    Canvas(_Canvas *canvas)
+    {
+        _canvas = canvas;
+    }
+
     _Canvas *_canvas{nullptr};
 };
 

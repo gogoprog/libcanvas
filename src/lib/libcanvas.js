@@ -14,6 +14,19 @@ var LibraryCanvas = {
         Canvas.canvasList.push(element);
         return Canvas.canvasList.length - 1;
     },
+    lcGetPreloadedImage: function(filename) {
+        filename = PATH.resolve(Pointer_stringify(filename));
+        var raw = Module.preloadedImages[filename];
+
+        if(raw) {
+            Canvas.canvasList.push(raw);
+            return Canvas.canvasList.length - 1;
+        }
+
+        Runtime.warnOnce('Cannot find preloaded image ' + filename);
+
+        return 0;
+    },
     lcCanvasGetContext: function(canvas, name) {
         canvas = Canvas.canvasList[canvas];
         name = Pointer_stringify(name);
@@ -35,7 +48,7 @@ var LibraryCanvas = {
     lcCanvasGLTexImage2D__deps: ['$GL'],
     lcCanvasGLTexImage2D: function(canvas, target, level, internalFormat, format, type) {
         canvas = Canvas.canvasList[canvas];
-        GL.texImage2d(target, level, internalFormat, format, type, canvas);
+        GLctx.texImage2D(target, level, internalFormat, format, type, canvas);
     },
     lcContextSetPropertyString: function(context, name, value) {
         context = Canvas.contextList[context];
