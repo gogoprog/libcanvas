@@ -13,7 +13,8 @@ solution "libcanvas"
         configuration "*Release"
             defines { "NDEBUG" }
             flags { "Optimize" }
-        
+            linkoptions { "-O2" }
+
         configuration "Emscripten*"
             buildoptions { "--std=c++11" }
             targetname "libcanvas_test.html"
