@@ -1,8 +1,13 @@
 var LibraryCanvas = {
     $Canvas: {
         canvasList: [],
-        contextList: []
+        contextList: [],
+        stringBuffer: null,
+        init: function() {
+            Canvas.stringBuffer = Module._malloc(512);
+        }
     },
+    $Canvas__postset: '__ATINIT__.push(function() { Canvas.init(); });',
     lcNewCanvas: function() {
         var element = document.createElement('canvas');
         Canvas.canvasList.push(element);
@@ -71,18 +76,19 @@ var LibraryCanvas = {
         name = Pointer_stringify(name);
         context[name] = value;
     },
-    lcContextGetPropertyString: function(context, name, value) {
+    lcContextGetPropertyString: function(context, name) {
         context = Canvas.contextList[context];
         name = Pointer_stringify(name);
-        value = Pointer_stringify(value);
-        return value;
+        var stringBuffer = Canvas.stringBuffer;
+        Module.stringToUTF8(context[name], stringBuffer, 512);
+        return stringBuffer;
     },
-    lcContextGetPropertyInt: function(context, name, value) {
+    lcContextGetPropertyInt: function(context, name) {
         context = Canvas.contextList[context];
         name = Pointer_stringify(name);
         return context[name];
     },
-    lcContextGetPropertyFloat: function(context, name, value) {
+    lcContextGetPropertyFloat: function(context, name) {
         context = Canvas.contextList[context];
         name = Pointer_stringify(name);
         return context[name];

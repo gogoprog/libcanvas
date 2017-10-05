@@ -19,12 +19,16 @@ int main()
     context.setStrokeStyle("cyan");
     context.strokeRect(300, 10, 100, 100);
 
+    std::cout << context.getFillStyle() << std::endl;
+
     context.setGlobalAlpha(1.0f);
 
     context.setFont("12px serif");
     context.setFillStyle("white");
     context.fillText("libcanvas test application", 32, 32, 256);
     context.strokeText("libcanvas test application", 32, 256, 256);
+
+    std::cout << context.getFillStyle() << std::endl;
 
     context.beginPath();
     context.setStrokeStyle("blue");

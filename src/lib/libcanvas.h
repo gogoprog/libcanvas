@@ -41,9 +41,9 @@ extern "C"
     void lcContextSetPropertyString(const _Context *context, const char *name, const char *value);
     void lcContextSetPropertyInt(const _Context *context, const char *name, const int value);
     void lcContextSetPropertyFloat(const _Context *context, const char *name, const float value);
-    const char *lcContextSetPropertyString(const _Context *context, const char *name);
-    int lcContextSetPropertyInt(const _Context *context, const char *name);
-    float lcContextSetPropertyFloat(const _Context *context, const char *name);
+    const char *lcContextGetPropertyString(const _Context *context, const char *name);
+    int lcContextGetPropertyInt(const _Context *context, const char *name);
+    float lcContextGetPropertyFloat(const _Context *context, const char *name);
     void lcContextClearRect(const _Context *context, const int x, const int y, const int w, const int h);
     void lcContextFillRect(const _Context *context, const int x, const int y, const int w, const int h);
     void lcContextStrokeRect(const _Context *context, const int x, const int y, const int w, const int h);
