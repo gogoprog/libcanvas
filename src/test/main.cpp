@@ -8,10 +8,11 @@ int main()
     canvas.setWidth(512);
     canvas.setHeight(512);
 
+    std::cout << canvas.getWidth() << "x" << canvas.getHeight() << std::endl;
+
     auto context = canvas.getContext("2d");
 
     context.setGlobalAlpha(0.5f);
-    
     context.setFillStyle("red");
     context.fillRect(10, 10, 100, 100);
     context.clearRect(32, 32, 32, 32);

@@ -45,6 +45,11 @@ var LibraryCanvas = {
         name = Pointer_stringify(name);
         canvas[name] = value;
     },
+    lcCanvasGetPropertyInt: function(canvas, name) {
+        canvas = Canvas.canvasList[canvas];
+        name = Pointer_stringify(name);
+        return canvas[name];
+    },
     lcCanvasGLTexImage2D__deps: ['$GL'],
     lcCanvasGLTexImage2D: function(canvas, target, level, internalFormat, format, type) {
         canvas = Canvas.canvasList[canvas];
@@ -65,6 +70,22 @@ var LibraryCanvas = {
         context = Canvas.contextList[context];
         name = Pointer_stringify(name);
         context[name] = value;
+    },
+    lcContextGetPropertyString: function(context, name, value) {
+        context = Canvas.contextList[context];
+        name = Pointer_stringify(name);
+        value = Pointer_stringify(value);
+        return value;
+    },
+    lcContextGetPropertyInt: function(context, name, value) {
+        context = Canvas.contextList[context];
+        name = Pointer_stringify(name);
+        return context[name];
+    },
+    lcContextGetPropertyFloat: function(context, name, value) {
+        context = Canvas.contextList[context];
+        name = Pointer_stringify(name);
+        return context[name];
     },
     lcContextClearRect: function(context, x, y, w, h) {
         context = Canvas.contextList[context];
