@@ -82,31 +82,13 @@ class Context
 public:
 
     CONTEXT_PROPERTY(fillStyle, FillStyle, const char *, String);
-
-    inline void setStrokeStyle(const char *name)
-    {
-        lcContextSetPropertyString(_context, "strokeStyle", name);
-    }
-
-    inline void setFont(const char *name)
-    {
-        lcContextSetPropertyString(_context, "font", name);
-    }
-
-    inline void setTextAlign(const char *value)
-    {
-        lcContextSetPropertyString(_context, "textAlign", value);
-    }
-
-    inline void setTextBaseLine(const char *value)
-    {
-        lcContextSetPropertyString(_context, "textBaseLine", value);
-    }
-
-    inline void setDirection(const char *value)
-    {
-        lcContextSetPropertyString(_context, "direction", value);
-    }
+    CONTEXT_PROPERTY(strokeStyle, StrokeStyle, const char *, String);
+    CONTEXT_PROPERTY(font, Font, const char *, String);
+    CONTEXT_PROPERTY(textAlign, TextAlign, const char *, String);
+    CONTEXT_PROPERTY(textBaseLine, TextBaseLine, const char *, String);
+    CONTEXT_PROPERTY(direction, Direction, const char *, String);
+    CONTEXT_PROPERTY(globalAlpha, GlobalAlpha, float, Float);
+    CONTEXT_PROPERTY(globalCompositeOperation, GlobalCompositeOperation, const char *, String);
 
     inline void clearRect(const int x, const int y, const int w, const int h)
     {
@@ -238,16 +220,6 @@ public:
     inline void resetTransform()
     {
         lcContextResetTransform(_context);
-    }
-
-    inline void setGlobalAlpha(const float value)
-    {
-        lcContextSetPropertyFloat(_context, "globalAlpha", value);
-    }
-
-    inline void setGlobalCompositeOperation(const char *value)
-    {
-        lcContextSetPropertyString(_context, "globalCompositeOperation", value);
     }
 
     void drawImage(const Canvas & canvas, const float x, const float y);
