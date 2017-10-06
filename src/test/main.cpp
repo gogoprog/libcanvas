@@ -8,15 +8,18 @@ int main()
     canvas.setWidth(512);
     canvas.setHeight(512);
 
+    std::cout << canvas.getWidth() << "x" << canvas.getHeight() << std::endl;
+
     auto context = canvas.getContext("2d");
 
     context.setGlobalAlpha(0.5f);
-    
     context.setFillStyle("red");
     context.fillRect(10, 10, 100, 100);
     context.clearRect(32, 32, 32, 32);
     context.setStrokeStyle("cyan");
     context.strokeRect(300, 10, 100, 100);
+
+    std::cout << context.getFillStyle() << std::endl;
 
     context.setGlobalAlpha(1.0f);
 
@@ -24,6 +27,8 @@ int main()
     context.setFillStyle("white");
     context.fillText("libcanvas test application", 32, 32, 256);
     context.strokeText("libcanvas test application", 32, 256, 256);
+
+    std::cout << context.getFillStyle() << std::endl;
 
     context.beginPath();
     context.setStrokeStyle("blue");

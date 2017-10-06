@@ -1,5 +1,32 @@
 #pragma once
 
+#define CANVAS_PROPERTY(camelCaseName, PascalCaseName, Type) \
+    inline void set##PascalCaseName(types::Type value) \
+    {\
+        lcCanvasSetProperty##Type(_canvas, #camelCaseName, value);\
+    }\
+    inline types::Type get##PascalCaseName()\
+    {\
+        return lcCanvasGetProperty##Type(_canvas, #camelCaseName);\
+    }
+
+#define CONTEXT_PROPERTY(camelCaseName, PascalCaseName, Type) \
+    inline void set##PascalCaseName(types::Type value) \
+    {\
+        lcContextSetProperty##Type(_context, #camelCaseName, value);\
+    }\
+    inline types::Type get##PascalCaseName()\
+    {\
+        return lcContextGetProperty##Type(_context, #camelCaseName);\
+    }
+
+namespace types
+{
+    using String = const char *;
+    using Float = float;
+    using Int = int;
+}
+
 struct TextMetrics
 {
     float width;
@@ -16,10 +43,14 @@ extern "C"
     _Context * lcCanvasGetContext(const _Canvas *canvas, const char *name);
     void lcCanvasSetPropertyString(const _Canvas *canvas, const char *name, const char *value);
     void lcCanvasSetPropertyInt(const _Canvas *canvas, const char *name, const int value);
+    int lcCanvasGetPropertyInt(const _Canvas *canvas, const char *name);
     void lcCanvasGLTexImage2D(const _Canvas *canvas, const int target, const int level, const int internalformat, const int format, const int type);
     void lcContextSetPropertyString(const _Context *context, const char *name, const char *value);
     void lcContextSetPropertyInt(const _Context *context, const char *name, const int value);
     void lcContextSetPropertyFloat(const _Context *context, const char *name, const float value);
+    const char *lcContextGetPropertyString(const _Context *context, const char *name);
+    int lcContextGetPropertyInt(const _Context *context, const char *name);
+    float lcContextGetPropertyFloat(const _Context *context, const char *name);
     void lcContextClearRect(const _Context *context, const int x, const int y, const int w, const int h);
     void lcContextFillRect(const _Context *context, const int x, const int y, const int w, const int h);
     void lcContextStrokeRect(const _Context *context, const int x, const int y, const int w, const int h);
@@ -57,35 +88,14 @@ class Context
 
 public:
 
-    inline void setFillStyle(const char *name)
-    {
-        lcContextSetPropertyString(_context, "fillStyle", name);
-    }
-
-    inline void setStrokeStyle(const char *name)
-    {
-        lcContextSetPropertyString(_context, "strokeStyle", name);
-    }
-
-    inline void setFont(const char *name)
-    {
-        lcContextSetPropertyString(_context, "font", name);
-    }
-
-    inline void setTextAlign(const char *value)
-    {
-        lcContextSetPropertyString(_context, "textAlign", value);
-    }
-
-    inline void setTextBaseLine(const char *value)
-    {
-        lcContextSetPropertyString(_context, "textBaseLine", value);
-    }
-
-    inline void setDirection(const char *value)
-    {
-        lcContextSetPropertyString(_context, "direction", value);
-    }
+    CONTEXT_PROPERTY(fillStyle, FillStyle, String);
+    CONTEXT_PROPERTY(strokeStyle, StrokeStyle, String);
+    CONTEXT_PROPERTY(font, Font, String);
+    CONTEXT_PROPERTY(textAlign, TextAlign, String);
+    CONTEXT_PROPERTY(textBaseLine, TextBaseLine, String);
+    CONTEXT_PROPERTY(direction, Direction, String);
+    CONTEXT_PROPERTY(globalAlpha, GlobalAlpha, Float);
+    CONTEXT_PROPERTY(globalCompositeOperation, GlobalCompositeOperation, String);
 
     inline void clearRect(const int x, const int y, const int w, const int h)
     {
@@ -219,16 +229,6 @@ public:
         lcContextResetTransform(_context);
     }
 
-    inline void setGlobalAlpha(const float value)
-    {
-        lcContextSetPropertyFloat(_context, "globalAlpha", value);
-    }
-
-    inline void setGlobalCompositeOperation(const char *value)
-    {
-        lcContextSetPropertyString(_context, "globalCompositeOperation", value);
-    }
-
     void drawImage(const Canvas & canvas, const float x, const float y);
 
 private:
@@ -258,15 +258,8 @@ public:
         return result;
     }
 
-    void setWidth(const int value)
-    {
-        lcCanvasSetPropertyInt(_canvas, "width", value);
-    }
-
-    void setHeight(const int value)
-    {
-        lcCanvasSetPropertyInt(_canvas, "height", value);
-    }
+    CANVAS_PROPERTY(width, Width, Int);
+    CANVAS_PROPERTY(height, Height, Int);
 
     void glTexImage2D(const int target, const int level, const int internalFormat, const int format, const int type)
     {
@@ -297,3 +290,7 @@ inline void Context::drawImage(const Canvas & canvas, const float x, const float
 {
     lcContextDrawImage(_context, canvas._canvas, x, y);
 }
+
+#undef CANVAS_PROPERTY
+#undef CONTEXT_PROPERTY
+

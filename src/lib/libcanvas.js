@@ -1,8 +1,13 @@
 var LibraryCanvas = {
     $Canvas: {
         canvasList: [],
-        contextList: []
+        contextList: [],
+        stringBuffer: null,
+        init: function() {
+            Canvas.stringBuffer = Module._malloc(512);
+        }
     },
+    $Canvas__postset: '__ATINIT__.push(function() { Canvas.init(); });',
     lcNewCanvas: function() {
         var element = document.createElement('canvas');
         Canvas.canvasList.push(element);
@@ -45,6 +50,11 @@ var LibraryCanvas = {
         name = Pointer_stringify(name);
         canvas[name] = value;
     },
+    lcCanvasGetPropertyInt: function(canvas, name) {
+        canvas = Canvas.canvasList[canvas];
+        name = Pointer_stringify(name);
+        return canvas[name];
+    },
     lcCanvasGLTexImage2D__deps: ['$GL'],
     lcCanvasGLTexImage2D: function(canvas, target, level, internalFormat, format, type) {
         canvas = Canvas.canvasList[canvas];
@@ -65,6 +75,23 @@ var LibraryCanvas = {
         context = Canvas.contextList[context];
         name = Pointer_stringify(name);
         context[name] = value;
+    },
+    lcContextGetPropertyString: function(context, name) {
+        context = Canvas.contextList[context];
+        name = Pointer_stringify(name);
+        var stringBuffer = Canvas.stringBuffer;
+        Module.stringToUTF8(context[name], stringBuffer, 512);
+        return stringBuffer;
+    },
+    lcContextGetPropertyInt: function(context, name) {
+        context = Canvas.contextList[context];
+        name = Pointer_stringify(name);
+        return context[name];
+    },
+    lcContextGetPropertyFloat: function(context, name) {
+        context = Canvas.contextList[context];
+        name = Pointer_stringify(name);
+        return context[name];
     },
     lcContextClearRect: function(context, x, y, w, h) {
         context = Canvas.contextList[context];
