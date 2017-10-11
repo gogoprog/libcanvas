@@ -204,6 +204,16 @@ var LibraryCanvas = {
         context = Canvas.contextList[context];
         canvas = Canvas.canvasList[canvas];
         context.drawImage(canvas, x, y);
+    },
+    lcContextDrawImage2: function(context, canvas, x, y, w, h) {
+        context = Canvas.contextList[context];
+        canvas = Canvas.canvasList[canvas];
+        context.drawImage(canvas, x, y, w, h);
+    },
+    lcContextDrawImage3: function(context, canvas, sx, sy, sw, sh, x, y, w, h) {
+        context = Canvas.contextList[context];
+        canvas = Canvas.canvasList[canvas];
+        context.drawImage(canvas, sx, sy, sw, sh, x, y, w, h);
     }
 };
 

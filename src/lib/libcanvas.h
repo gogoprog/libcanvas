@@ -78,6 +78,8 @@ extern "C"
     void lcContextSetTransform(const _Context *context, const float a, const float b, const float c, const float d, const float e, const float f);
     void lcContextResetTransform(const _Context *context);
     void lcContextDrawImage(const _Context *context, const _Canvas *canvas, const float x, const float y);
+    void lcContextDrawImage2(const _Context *context, const _Canvas *canvas, const float x, const float y, const float w, const float h);
+    void lcContextDrawImage3(const _Context *context, const _Canvas *canvas, const float sx, const float sy, const float sw, const float sh, const float x, const float y, const float w, const float h);
 }
 
 class Canvas;
@@ -230,6 +232,8 @@ public:
     }
 
     void drawImage(const Canvas & canvas, const float x, const float y);
+    void drawImage(const Canvas & canvas, const float x, const float y, const float w, const float h);
+    void drawImage(const Canvas & canvas, const float sx, const float sy, const float sw, const float sh, const float x, const float y, const float w, const float h);
 
 private:
     Context() = default;
@@ -289,6 +293,16 @@ private:
 inline void Context::drawImage(const Canvas & canvas, const float x, const float y)
 {
     lcContextDrawImage(_context, canvas._canvas, x, y);
+}
+
+inline void Context::drawImage(const Canvas & canvas, const float x, const float y, const float w, const float h)
+{
+    lcContextDrawImage2(_context, canvas._canvas, x, y, w, h);
+}
+
+inline void Context::drawImage(const Canvas & canvas, const float sx, const float sy, const float sw, const float sh, const float x, const float y, const float w, const float h)
+{
+    lcContextDrawImage3(_context, canvas._canvas, sx, sy, sw, sh, x, y, w, h);
 }
 
 #undef CANVAS_PROPERTY
